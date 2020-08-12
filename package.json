@@ -1,0 +1,12 @@
+{
+  "name": "layouter-client-helper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kazukinagata/layouter-client-helper.git",
+  "author": "Kazuki Nagata",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "typescript": "^3.9.7"
+  }
+}
