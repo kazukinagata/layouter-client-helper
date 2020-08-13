@@ -7,9 +7,10 @@
   "author": "Kazuki Nagata",
   "license": "MIT",
   "private": true,
+  "files": ["dist"],
   "scripts": {
     "build": "tsc -p .",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
   "dependencies": {
     "axios": "^0.19.2",
