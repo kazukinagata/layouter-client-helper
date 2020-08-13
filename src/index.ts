@@ -64,7 +64,7 @@ export default class {
     }
   }
 
-  async toPng(params: { uuid: string; value: string }) {
+  async toPng(params: UpdateParam[]) {
     // do something stuff
     const res = await axios.post<ArrayBuffer[]>(
       `${API_ROOT}/api/svg/${this.docId}/png`,
