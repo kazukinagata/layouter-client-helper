@@ -1,8 +1,24 @@
 import axios from 'axios'
 
+export type SVGForm = {
+  [inputId: string]: {
+    id: string
+    tag: string
+    label: string
+    value: string
+  }
+}
+type Inputs = {
+  [svgId: string]: SVGForm
+}
+
 const API_ROOT = process.env.NODE_ENV === 'production' ? 'any' : 'http://localhost:9000'
 export default class {
   constructor(private token: string, private docId: string) {}
+
+  static prepareUpdateData(data: Inputs) {
+    return Object.keys(data).reduce<SVGForm>((result, key) => ({...result, ...data[key]}), {})
+  }
 
   async load(): Promise<string[]> {
     try {
