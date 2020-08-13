@@ -12,12 +12,24 @@ type Inputs = {
   [svgId: string]: SVGForm
 }
 
-const API_ROOT = process.env.NODE_ENV === 'production' ? 'any' : 'http://localhost:9000'
+type UpdateParam = { uuid: string; value: string }
+
+const API_ROOT =
+  process.env.NODE_ENV === 'production' ? 'any' : 'http://localhost:9000'
 export default class {
   constructor(private token: string, private docId: string) {}
 
-  static prepareUpdateData(data: Inputs) {
-    return Object.keys(data).reduce<SVGForm>((result, key) => ({...result, ...data[key]}), {})
+  static prepareData(data: Inputs): UpdateParam[] {
+    return Object.keys(data).reduce<UpdateParam[]>((result, key) => {
+      const fields = data[key]
+      return [
+        ...result,
+        ...Object.keys(fields).map((key) => ({
+          uuid: key,
+          value: fields[key].value,
+        })),
+      ]
+    }, [])
   }
 
   async load(): Promise<string[]> {
@@ -36,13 +48,13 @@ export default class {
     }
   }
 
-  async update(params: {uuid: string, value: string}) {
+  async update(params: UpdateParam[]) {
     try {
       const res = await axios.post<string[]>(
         `${API_ROOT}/api/svg/${this.docId}`,
         {
           token: this.token,
-          params
+          params,
         }
       )
 
@@ -52,18 +64,23 @@ export default class {
     }
   }
 
-  async toPng(params: {uuid: string, value: string}) {
+  async toPng(params: { uuid: string; value: string }) {
     // do something stuff
-    const res = await axios.post<ArrayBuffer[]>(`${API_ROOT}/api/svg/${this.docId}/png`, {
-      token: this.token,
-      params
-    })
+    const res = await axios.post<ArrayBuffer[]>(
+      `${API_ROOT}/api/svg/${this.docId}/png`,
+      {
+        token: this.token,
+        params,
+      }
+    )
     return res.data
   }
 
   async getThumbnail() {
     // do something stuff
-    const res = await axios.get<ArrayBuffer>(`${API_ROOT}/api/svg/${this.docId}/thumbnail`)
+    const res = await axios.get<ArrayBuffer>(
+      `${API_ROOT}/api/svg/${this.docId}/thumbnail`
+    )
     return res.data
   }
 }
