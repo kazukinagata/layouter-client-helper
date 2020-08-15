@@ -72,7 +72,7 @@ export default class {
         params,
       },
     )
-    return res.data
+    return res.data.map(d => d.data)
   }
 
   async getThumbnail() {
