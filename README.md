@@ -115,3 +115,6 @@ Object.keys(svgInputs).forEach((key) => {
 })
 ```
 
+## Demo
+- [Live demo](https://layouter-react-demo.herokuapp.com/)
+- repo: https://github.com/kazukinagata/layouter-demo.git
