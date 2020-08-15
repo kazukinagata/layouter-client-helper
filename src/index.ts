@@ -65,7 +65,7 @@ export default class {
 
   async toPng(params: UpdateParam[]) {
     // do something stuff
-    const res = await axios.post<ArrayBuffer[]>(
+    const res = await axios.post<{type: string, data: ArrayBuffer}[]>(
       `${this.apiRoot}/api/svg/${this.docId}/png`,
       {
         token: this.token,
