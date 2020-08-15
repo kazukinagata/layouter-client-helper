@@ -14,10 +14,9 @@ type Inputs = {
 
 type UpdateParam = { uuid: string; value: string }
 
-const API_ROOT =
-  process.env.NODE_ENV === 'production' ? 'any' : 'http://localhost:9000'
+const DEFAULT_API_ROOT = 'https://layouter-editor-server.herokuapp.com'
 export default class {
-  constructor(private token: string, private docId: string) {}
+  constructor(private token: string, private docId: string, private apiRoot: string = DEFAULT_API_ROOT) {}
 
   static prepareData(data: Inputs): UpdateParam[] {
     return Object.keys(data).reduce<UpdateParam[]>((result, key) => {
@@ -32,10 +31,10 @@ export default class {
     }, [])
   }
 
-  async load(): Promise<string[]> {
+  async initialize(): Promise<string[]> {
     try {
       const res = await axios.get<string[]>(
-        `${API_ROOT}/api/svg/${this.docId}`,
+        `${this.apiRoot}/api/svg/${this.docId}`,
         {
           params: {
             token: this.token,
@@ -51,7 +50,7 @@ export default class {
   async update(params: UpdateParam[]) {
     try {
       const res = await axios.post<string[]>(
-        `${API_ROOT}/api/svg/${this.docId}`,
+        `${this.apiRoot}/api/svg/${this.docId}`,
         {
           token: this.token,
           params,
@@ -67,7 +66,7 @@ export default class {
   async toPng(params: UpdateParam[]) {
     // do something stuff
     const res = await axios.post<ArrayBuffer[]>(
-      `${API_ROOT}/api/svg/${this.docId}/png`,
+      `${this.apiRoot}/api/svg/${this.docId}/png`,
       {
         token: this.token,
         params,
@@ -78,8 +77,8 @@ export default class {
 
   async getThumbnail() {
     // do something stuff
-    const res = await axios.get<ArrayBuffer>(
-      `${API_ROOT}/api/svg/${this.docId}/thumbnail`
+    const res = await axios.get<ArrayBuffer[]>(
+      `${this.apiRoot}/api/svg/${this.docId}/thumbnail`
     )
     return res.data
   }
