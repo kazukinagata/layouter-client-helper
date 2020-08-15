@@ -88,9 +88,9 @@ helper.toPng(ClientHelper.prepareData(getFormDataSample())).then((buffers: Array
 ```
 
 ```typescript
-// レイアウト一覧用にサムネイルを取得します
-// 表・裏のレイアウトの場合２つのbufferを返します
-helper.getThumbnail().then((buffers: ArrayBuffer[]) => {
+// レイアウト一覧用にサムネイルURLを取得します
+// 表・裏のレイアウトの場合２つのurlを返します
+helper.getThumbnail().then((buffers: string[]) => {
   // Do something
 })
 ```
