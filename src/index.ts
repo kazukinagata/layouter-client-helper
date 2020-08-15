@@ -70,15 +70,20 @@ export default class {
       {
         token: this.token,
         params,
-      }
+      },
     )
     return res.data
   }
 
   async getThumbnail() {
     // do something stuff
-    const res = await axios.get<ArrayBuffer[]>(
-      `${this.apiRoot}/api/svg/${this.docId}/thumbnail`
+    const res = await axios.get<string[]>(
+      `${this.apiRoot}/api/svg/${this.docId}/thumbnail`,
+      {
+        params: {
+          token: this.token,
+        },
+      }
     )
     return res.data
   }
