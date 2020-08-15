@@ -41,7 +41,7 @@ const ClientHelper = require('layouter-client-helper').default
 /* レイアウトの設定ファイルを読み込みます */
 const setting: Setting = /** Parse from layout.config.json */
 
-const helper = new ClientHelper(settings.token, settings.layoutId)
+const helper = new ClientHelper(setting.token, setting.layoutId)
 ```
 
 ```typescript
