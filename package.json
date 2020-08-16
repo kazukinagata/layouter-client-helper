@@ -1,18 +1,23 @@
 {
-  "name": "layouter-client-helper",
+  "name": "@koishidev/layouter-client-helper",
   "version": "1.2.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "https://github.com/kazukinagata/layouter-client-helper.git",
-  "author": "Kazuki Nagata",
-  "license": "MIT",
-  "private": true,
+  "author": "kazukinagata <KNagata8@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koishidev/layouter-lib-font-service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/koishidev/layouter-lib-font-service/issues"
+  },
+  "homepage": "https://github.com/koishidev/layouter-lib-font-service#readme",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p .",
-    "postinstall": "npm run build"
+    "build": "tsc -p ."
   },
   "dependencies": {
     "axios": "^0.19.2",
