@@ -1,8 +1,5 @@
 # layouter-client-helper
 
-## install
-See https://github.com/koishidev/layouter-lib-font-service/packages/359221
-
 ## Usage
 ```typescript
 /**

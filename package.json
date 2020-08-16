@@ -7,12 +7,12 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/koishidev/layouter-lib-font-service.git"
+    "url": "git+https://github.com/koishidev/layouter-client-helper.git"
   },
   "bugs": {
-    "url": "https://github.com/koishidev/layouter-lib-font-service/issues"
+    "url": "https://github.com/koishidev/layouter-client-helper/issues"
   },
-  "homepage": "https://github.com/koishidev/layouter-lib-font-service#readme",
+  "homepage": "https://github.com/koishidev/layouter-client-helper#readme",
   "files": [
     "dist"
   ],
