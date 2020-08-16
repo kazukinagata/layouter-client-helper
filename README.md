@@ -1,9 +1,7 @@
 # layouter-client-helper
 
 ## install
-```
-$ yarn add https://github.com/kazukinagata/layouter-client-helper.git
-```
+See https://github.com/koishidev/layouter-lib-font-service/packages/359221
 
 ## Usage
 ```typescript
@@ -117,4 +115,4 @@ Object.keys(svgInputs).forEach((key) => {
 
 ## Demo
 - [Live demo](https://layouter-react-demo.herokuapp.com/)
-- repo: https://github.com/kazukinagata/layouter-demo.git
+- repo: https://github.com/koishidev/layouter-demo
