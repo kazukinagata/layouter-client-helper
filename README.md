@@ -1,5 +1,13 @@
 # layouter-client-helper
 
+## Install
+```
+$ echo @koishidev:registry=https://npm.pkg.github.com > .npmrc
+$ npm install @koishidev/layouter-client-helper
+// or
+$ yarn add @koishidev/layouter-client-helper
+```
+
 ## Usage
 ```typescript
 /**
