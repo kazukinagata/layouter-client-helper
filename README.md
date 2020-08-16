@@ -2,7 +2,10 @@
 
 ## Install
 ```
-$ echo @koishidev:registry=https://npm.pkg.github.com > .npmrc
+$ echo "@koishidev:registry=https://npm.pkg.github.com" >> .npmrc
+// アクセストークンは管理者にお問い合わせください
+$ echo "//npm.pkg.github.com/:_authToken=${GITHUB_PACKAGES_AUTH_TOKEN}" >> .npmrc
+
 $ npm install @koishidev/layouter-client-helper
 // or
 $ yarn add @koishidev/layouter-client-helper
