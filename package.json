@@ -1,6 +1,6 @@
 {
   "name": "@koishidev/layouter-client-helper",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "kazukinagata <KNagata8@gmail.com>",
@@ -26,6 +26,6 @@
   },
   "devDependencies": {},
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/"
   }
 }
