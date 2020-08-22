@@ -34,7 +34,7 @@ export default class {
   async initialize(): Promise<string[]> {
     try {
       const res = await axios.get<string[]>(
-        `${this.apiRoot}/api/svg/${this.docId}`,
+        `${this.apiRoot}/svg/${this.docId}`,
         {
           params: {
             token: this.token,
@@ -50,7 +50,7 @@ export default class {
   async update(params: UpdateParam[]) {
     try {
       const res = await axios.post<string[]>(
-        `${this.apiRoot}/api/svg/${this.docId}`,
+        `${this.apiRoot}/svg/${this.docId}`,
         {
           token: this.token,
           params,
@@ -66,7 +66,7 @@ export default class {
   async toPng(params: UpdateParam[]) {
     // do something stuff
     const res = await axios.post<{type: string, data: ArrayBuffer}[]>(
-      `${this.apiRoot}/api/svg/${this.docId}/png`,
+      `${this.apiRoot}/svg/${this.docId}/png`,
       {
         token: this.token,
         params,
@@ -78,7 +78,7 @@ export default class {
   async getThumbnail() {
     // do something stuff
     const res = await axios.get<string[]>(
-      `${this.apiRoot}/api/svg/${this.docId}/thumbnail`,
+      `${this.apiRoot}/svg/${this.docId}/thumbnail`,
       {
         params: {
           token: this.token,
