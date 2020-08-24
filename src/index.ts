@@ -14,7 +14,7 @@ type Inputs = {
 
 type UpdateParam = { uuid: string; value: string }
 
-const DEFAULT_API_ROOT = 'https://layouter-editor-server.herokuapp.com'
+const DEFAULT_API_ROOT = 'http://localhost:9000'
 export default class {
   constructor(private token: string, private docId: string, private apiRoot: string = DEFAULT_API_ROOT) {}
 
