@@ -1,15 +1,23 @@
 import axios from 'axios'
 
-export type SVGForm = {
-  [inputId: string]: {
-    id: string
-    tag: string
-    label: string
-    value: string
-  }
+export type Tag = 'input' | 'textArea'
+export interface SVGFormAttrs {
+  id: string
+  tag: Tag
+  label: string
+  fieldId: string
+  value: string
+  order: number
+  parent?: string
 }
-type Inputs = {
-  [svgId: string]: SVGForm
+export interface SVGForm {
+  [inputId: string]: SVGFormAttrs
+}
+export interface Inputs {
+  [svgId: string]: {
+    name: string
+    elements: SVGForm
+  }
 }
 
 type UpdateParam = { uuid: string; value: string }
@@ -20,12 +28,12 @@ export default class {
 
   static prepareData(data: Inputs): UpdateParam[] {
     return Object.keys(data).reduce<UpdateParam[]>((result, key) => {
-      const fields = data[key]
+      const {elements} = data[key]
       return [
         ...result,
-        ...Object.keys(fields).map((key) => ({
+        ...Object.keys(elements).map((key) => ({
           uuid: key,
-          value: fields[key].value,
+          value: elements[key].value,
         })),
       ]
     }, [])
