@@ -20,15 +20,22 @@ export interface Inputs {
   }
 }
 
-type UpdateParam = { uuid: string; value: string }
+export interface UpdateParam {
+  uuid: string
+  value: string
+}
 
 const DEFAULT_API_ROOT = 'http://localhost:9000/api/v1'
 export default class {
-  constructor(private token: string, private docId: string, private apiRoot: string = DEFAULT_API_ROOT) {}
+  constructor(
+    private token: string,
+    private docId: string,
+    private apiRoot: string = DEFAULT_API_ROOT
+  ) {}
 
   static prepareData(data: Inputs): UpdateParam[] {
     return Object.keys(data).reduce<UpdateParam[]>((result, key) => {
-      const {elements} = data[key]
+      const { elements } = data[key]
       return [
         ...result,
         ...Object.keys(elements).map((key) => ({
@@ -39,7 +46,7 @@ export default class {
     }, [])
   }
 
-  async initialize(): Promise<string[]> {
+  async getInit(): Promise<string[]> {
     try {
       const res = await axios.get<string[]>(
         `${this.apiRoot}/svg/${this.docId}`,
@@ -73,15 +80,15 @@ export default class {
 
   async toPng(params: UpdateParam[], size: 'thumbnail' | 'full' = 'full') {
     // do something stuff
-    const res = await axios.post<{type: string, data: ArrayBuffer}[]>(
+    const res = await axios.post<{ type: string; data: ArrayBuffer }[]>(
       `${this.apiRoot}/svg/${this.docId}/png`,
       {
         token: this.token,
         params,
-        size
-      },
+        size,
+      }
     )
-    return res.data.map(d => d.data)
+    return res.data.map((d) => d.data)
   }
 
   async getThumbnail() {

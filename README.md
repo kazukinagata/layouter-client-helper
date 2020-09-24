@@ -16,16 +16,29 @@ $ yarn add @koishidev/layouter-client-helper
 /**
  * Types
  * */
-type SVGForm = {
-  [inputId: string]: {
-    id: string
-    tag: string
-    label: string
-    value: string
+export type Tag = 'input' | 'textArea'
+export interface SVGFormAttrs {
+  id: string
+  tag: Tag
+  label: string
+  fieldId: string
+  value: string
+  order: number
+  parent?: string
+}
+export interface SVGForm {
+  [inputId: string]: SVGFormAttrs
+}
+export interface Inputs {
+  [svgId: string]: {
+    name: string
+    elements: SVGForm
   }
 }
-type Inputs = {
-  [svgId: string]: SVGForm
+
+export interface UpdateParam {
+  uuid: string
+  value: string
 }
 
 type Setting {
@@ -41,11 +54,9 @@ type Setting {
  * */
 // ES6
 import ClientHelper from 'layouter-client-helper'
-// or commonjs
-const ClientHelper = require('layouter-client-helper').default
 
 /* レイアウトの設定ファイルを読み込みます */
-const setting: Setting = /** Parse from layout.config.json */
+const setting: Setting = /** load from layout.config.json */
 
 const helper = new ClientHelper(setting.token, setting.layoutId)
 ```
@@ -101,9 +112,60 @@ helper.getThumbnail().then((urls: string[]) => {
 })
 ```
 
+## API
+### getInit
+---
+getInit ( ): Promise<string[]>
+
+---
+Returns Promise<string[]>
+
+---
+レイアウトsvgをbase64エンコードして配列で返します。
+表、裏のレイアウトの場合は2つのsvgデータが配列に含まれます。
+
+### update
+---
+update (params: UpdateParam[]): Promise<string[]>
+
+---
+Returns Promise<string>
+---
+フォームの入力をレイアウトに反映し、テキストの位置調整、テキストのアウトライン化が完了したsvgをbase64エンコードして配列で返します。
+
+### toPng
+---
+toPng (params: UpdateParam[], size: 'thumbnail' | 'full' = 'full'): Promise<ArrayBuffer[]>
+
+---
+Returns Promise<ArrayBuffer[]>
+
+---
+フォームの入力内容をレイアウトに反映し、PNGに変換して配列で返します。
+表・裏レイアウトの場合には二つのpngが配列に含まれます。
+
+### getThumbnail
+---
+getThumbnail ( ): Promise<string[]>
+
+---
+Returns Promise<string[]>
+
+---
+レイアウトのサムネイルPNG画像を配列で返します。
+レイアウト一覧表示を意図したもので、編集結果の画像を取得する場合は`toPng`を使用してください。
+
+### static prepareData
+---
+prepareData(data: Inputs): UpdateParam[]
+
+---
+Returns UpdateParam[]
+
+
 ## Ex) Create form
 ```typescript
-const setting: Setting = /** Parse from layout.config.json */
+const setting: Setting = /** load from layout.config.json */
 const inputs = setting.intputs
 
 // example
