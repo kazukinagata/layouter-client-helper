@@ -22,7 +22,7 @@ export interface Inputs {
 
 type UpdateParam = { uuid: string; value: string }
 
-const DEFAULT_API_ROOT = 'http://localhost:9000'
+const DEFAULT_API_ROOT = 'http://localhost:9000/api/v1'
 export default class {
   constructor(private token: string, private docId: string, private apiRoot: string = DEFAULT_API_ROOT) {}
 
@@ -71,13 +71,14 @@ export default class {
     }
   }
 
-  async toPng(params: UpdateParam[]) {
+  async toPng(params: UpdateParam[], size: 'thumbnail' | 'full' = 'full') {
     // do something stuff
     const res = await axios.post<{type: string, data: ArrayBuffer}[]>(
       `${this.apiRoot}/svg/${this.docId}/png`,
       {
         token: this.token,
         params,
+        size
       },
     )
     return res.data.map(d => d.data)
