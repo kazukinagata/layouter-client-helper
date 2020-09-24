@@ -130,6 +130,7 @@ update (params: UpdateParam[]): Promise<string[]>
 
 ---
 Returns Promise<string>
+
 ---
 フォームの入力をレイアウトに反映し、テキストの位置調整、テキストのアウトライン化が完了したsvgをbase64エンコードして配列で返します。
 
