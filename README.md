@@ -169,6 +169,16 @@ Returns Promise<string[]>
 レイアウトのサムネイルPNG画像を配列で返します。
 レイアウト一覧表示を意図したもので、編集結果の画像を取得する場合は`toPng`を使用してください。
 
+### batchCreatePngs
+---
+batchCreatePngs ( contents: {[clientId: string]: {uuid: string; value: string}[]} ): Promise<{[clientId: string]: string[]}>
+
+---
+Returns Promise<{[clientId: string]: string[]}>
+
+---
+名刺一括作成時のサムネイル画像を返します
+
 ### static prepareData
 ---
 prepareData(data: Inputs): UpdateParam[]
