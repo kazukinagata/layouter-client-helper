@@ -128,10 +128,10 @@ params
 
 ### getInit
 ---
-getInit ( ): Promise<string>
+getInit ( ): Promise< string >
 
 ---
-Returns Promise<string>
+Returns Promise< string >
 
 ---
 レイアウトpdfをbase64エンコードした値を返します。
@@ -139,10 +139,10 @@ Returns Promise<string>
 
 ### update
 ---
-update (params: UpdateParam[]): Promise<string>
+update (params: UpdateParam[]): Promise< string >
 
 ---
-Returns Promise<string>
+Returns Promise< string >
 
 ---
 フォームの入力をレイアウトに反映し、テキストの位置調整、テキストのアウトライン化が完了したpdfをbase64エンコードして返します。
