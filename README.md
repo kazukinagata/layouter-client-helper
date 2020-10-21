@@ -68,11 +68,11 @@ const helper = new ClientHelper(setting.token, setting.layoutId)
 
 // svgをbase64エンコーディングした値の配列を返します
 // 表・裏の名刺データの場合、2つのsvgが配列に含まれます
-helper.initialize().then((base64s: string[]) => {
+helper.initialize().then((base64: string) => {
 
   // imgタグのsrc属性に与えてsvgを表示
   const img = document.getElementById('myImage')
-  img.src = `data:image/svg+xml;base64,${base64s[0]}`
+  img.src = `data:application/pdf;base64,${base64}`
 })
 ```
 
@@ -91,7 +91,7 @@ const getFormDataSample = (): Inputs => {
   return initialInputs
 }
 
-helper.update(ClientHelper.prepareData(getFormDataSample())).then((base64: string[]) => {
+helper.update(ClientHelper.prepareData(getFormDataSample())).then((base64: string) => {
   // Same as initialize
 })
 
@@ -128,24 +128,24 @@ params
 
 ### getInit
 ---
-getInit ( ): Promise<string[]>
-
----
-Returns Promise<string[]>
-
----
-レイアウトsvgをbase64エンコードして配列で返します。
-表、裏のレイアウトの場合は2つのsvgデータが配列に含まれます。
-
-### update
----
-update (params: UpdateParam[]): Promise<string[]>
+getInit ( ): Promise<string>
 
 ---
 Returns Promise<string>
 
 ---
-フォームの入力をレイアウトに反映し、テキストの位置調整、テキストのアウトライン化が完了したsvgをbase64エンコードして配列で返します。
+レイアウトpdfをbase64エンコードした値を返します。
+表、裏のレイアウトは一つのpdfに描画されます。
+
+### update
+---
+update (params: UpdateParam[]): Promise<string>
+
+---
+Returns Promise<string>
+
+---
+フォームの入力をレイアウトに反映し、テキストの位置調整、テキストのアウトライン化が完了したpdfをbase64エンコードして返します。
 
 ### toPng
 ---

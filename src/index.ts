@@ -46,14 +46,12 @@ export default class {
     }, [])
   }
 
-  async getInit(): Promise<string[]> {
+  async getInit(): Promise<string> {
     try {
-      const res = await axios.get<string[]>(
-        `${this.apiRoot}/svg/${this.docId}`,
+      const res = await axios.post<string>(
+        `${this.apiRoot}/svg/${this.docId}/pdf`,
         {
-          params: {
-            token: this.token,
-          },
+          token: this.token
         }
       )
       return res.data
@@ -64,8 +62,8 @@ export default class {
 
   async update(params: UpdateParam[]) {
     try {
-      const res = await axios.post<string[]>(
-        `${this.apiRoot}/svg/${this.docId}`,
+      const res = await axios.post<string>(
+        `${this.apiRoot}/svg/${this.docId}/pdf`,
         {
           token: this.token,
           params,
