@@ -128,24 +128,23 @@ params
 
 ### getInit
 ---
-getInit ( ): Promise< string >
+getInit ( ): Promise<string[]>
 
 ---
-Returns Promise< string >
+Returns Promise<string[]>
 
 ---
-レイアウトpdfをbase64エンコードした値を返します。
-表、裏のレイアウトは一つのpdfに描画されます。
+レイアウトsvgをbase64エンコードした値を配列で返します。
 
 ### update
 ---
-update (params: UpdateParam[]): Promise< string >
+update (params: UpdateParam[]): Promise<{svg: string[], pdf: string}>
 
 ---
-Returns Promise< string >
+Returns Promise<{svg: string[], pdf: string}>
 
 ---
-フォームの入力をレイアウトに反映し、テキストの位置調整、テキストのアウトライン化が完了したpdfをbase64エンコードして返します。
+フォームの入力をレイアウトに反映し、テキストの位置調整、テキストのアウトライン化が完了したsvg及びpdfをbase64エンコードして返します。
 
 ### toPng
 ---
