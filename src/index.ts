@@ -75,7 +75,8 @@ export default class {
         axios.post<string>(
           `${this.apiRoot}/svg/${this.docId}/pdf`,
           {
-            token: this.token
+            token: this.token,
+            params
           }
         )
       ])
