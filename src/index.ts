@@ -115,9 +115,9 @@ export default class {
     return res.data
   }
 
-  async batchCreatePngs(contents: { [clientId: string]: UpdateParam[] }) {
-    const res = await axios.post<{ [clientId: string]: string[] }>(
-      `${this.apiRoot}/batch/pngs`,
+  async batchCreate(contents: { [clientId: string]: UpdateParam[] }) {
+    const res = await axios.post<{ [clientId: string]: {pdf: string, png: string[]} }>(
+      `${this.apiRoot}/batch`,
       {
         token: this.token,
         layoutId: this.docId,
