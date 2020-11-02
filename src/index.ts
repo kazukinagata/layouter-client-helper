@@ -120,34 +120,4 @@ export default class {
     return res.data
   }
 
-  async batchCreateSep(contents: { [clientId: string]: UpdateParam[] }) {
-    const [pdf, png] = await Promise.all([
-      axios.post<{ [clientId: string]: { pdf: string } }>(
-        `${this.apiRoot}/batch/pdf`,
-        {
-          token: this.token,
-          layoutId: this.docId,
-          contents,
-        }
-      ),
-      ['']
-      // axios.post<{ [clientId: string]: { png: string[] } }>(
-      //   `${this.apiRoot}/batch/png`,
-      //   {
-      //     token: this.token,
-      //     layoutId: this.docId,
-      //     contents,
-      //   }
-      // ),
-    ])
-    return Object.keys(contents).reduce<{[clientId: string]: {pdf: string, png: string[]}}>((obj, clientId) => {
-      return {
-        ...obj,
-        [clientId]: {
-          pdf: pdf.data[clientId].pdf,
-          png: png
-        }
-      }
-    }, {})
-  }
 }
