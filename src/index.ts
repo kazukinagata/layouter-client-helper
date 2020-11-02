@@ -52,8 +52,8 @@ export default class {
         `${this.apiRoot}/svg/${this.docId}`,
         {
           params: {
-            token: this.token
-          }
+            token: this.token,
+          },
         }
       )
       return res.data
@@ -65,24 +65,18 @@ export default class {
   async update(params: UpdateParam[]) {
     try {
       const [svg, pdf] = await Promise.all([
-        axios.post<string[]>(
-          `${this.apiRoot}/svg/${this.docId}`,
-          {
-            token: this.token,
-            params
-          }
-        ),
-        axios.post<string>(
-          `${this.apiRoot}/svg/${this.docId}/pdf`,
-          {
-            token: this.token,
-            params
-          }
-        )
+        axios.post<string[]>(`${this.apiRoot}/svg/${this.docId}`, {
+          token: this.token,
+          params,
+        }),
+        axios.post<string>(`${this.apiRoot}/svg/${this.docId}/pdf`, {
+          token: this.token,
+          params,
+        }),
       ])
       return {
         svg: svg.data,
-        pdf: pdf.data
+        pdf: pdf.data,
       }
     } catch (error) {
       throw new Error(error.message)
@@ -116,14 +110,43 @@ export default class {
   }
 
   async batchCreate(contents: { [clientId: string]: UpdateParam[] }) {
-    const res = await axios.post<{ [clientId: string]: {pdf: string, png: string[]} }>(
-      `${this.apiRoot}/batch`,
-      {
-        token: this.token,
-        layoutId: this.docId,
-        contents,
-      }
-    )
+    const res = await axios.post<{
+      [clientId: string]: { pdf: string; png: string[] }
+    }>(`${this.apiRoot}/batch`, {
+      token: this.token,
+      layoutId: this.docId,
+      contents,
+    })
     return res.data
+  }
+
+  async batchCreateSep(contents: { [clientId: string]: UpdateParam[] }) {
+    const [pdf, png] = await Promise.all([
+      axios.post<{ [clientId: string]: { pdf: string } }>(
+        `${this.apiRoot}/batch/pdf`,
+        {
+          token: this.token,
+          layoutId: this.docId,
+          contents,
+        }
+      ),
+      axios.post<{ [clientId: string]: { png: string[] } }>(
+        `${this.apiRoot}/batch/png`,
+        {
+          token: this.token,
+          layoutId: this.docId,
+          contents,
+        }
+      ),
+    ])
+    return Object.keys(contents).reduce<{[clientId: string]: {pdf: string, png: string[]}}>((obj, clientId) => {
+      return {
+        ...obj,
+        [clientId]: {
+          pdf: pdf.data[clientId].pdf,
+          png: png.data[clientId].png
+        }
+      }
+    }, {})
   }
 }
