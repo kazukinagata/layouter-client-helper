@@ -110,9 +110,7 @@ export default class {
   }
 
   async batchCreate(contents: { [clientId: string]: UpdateParam[] }) {
-    const res = await axios.post<{
-      [clientId: string]: { pdf: string; png: string[] }
-    }>(`${this.apiRoot}/batch`, {
+    const res = await axios.post<string>(`${this.apiRoot}/batch`, {
       token: this.token,
       layoutId: this.docId,
       contents,
@@ -120,4 +118,14 @@ export default class {
     return res.data
   }
 
+  async batchPolling(id: string) {
+    const res = await axios.get<any>(`${this.apiRoot}/batch`, {
+      params: {
+        token: this.token,
+        layoutId: this.docId,
+      }
+    })
+    console.log('batchPolling', res.data)
+    return res.data
+  }
 }
