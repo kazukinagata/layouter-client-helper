@@ -1,6 +1,6 @@
 {
   "name": "@koishidev/layouter-client-helper",
-  "version": "1.2.24",
+  "version": "1.2.25",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "kazukinagata <KNagata8@gmail.com>",
