@@ -119,7 +119,12 @@ export default class {
   }
 
   async batchPolling(id: string) {
-    const res = await axios.get<any>(`${this.apiRoot}/batch/${id}`, {
+    const res = await axios.get<{
+      status: 'completed' | 'waiting' | 'active' | 'delayed' | 'failed' | 'paused',
+      value?: {[clientId:string]: {png: string[], pdf: string}},
+      progress: number,
+      id: string,
+    }>(`${this.apiRoot}/batch/${id}`, {
       params: {
         token: this.token,
         layoutId: this.docId,
