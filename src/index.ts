@@ -110,7 +110,7 @@ export default class {
   }
 
   async batchCreate(contents: { [clientId: string]: UpdateParam[] }) {
-    const res = await axios.post<string>(`${this.apiRoot}/batch`, {
+    const res = await axios.post<{id: string}>(`${this.apiRoot}/batch`, {
       token: this.token,
       layoutId: this.docId,
       contents,
