@@ -30,7 +30,8 @@ export default class {
   constructor(
     private token: string,
     private docId: string,
-    private apiRoot: string = DEFAULT_API_ROOT
+    private apiRoot: string = DEFAULT_API_ROOT,
+    private debug: boolean = false
   ) {}
 
   static prepareData(data: Inputs): UpdateParam[] {
@@ -130,7 +131,10 @@ export default class {
         layoutId: this.docId,
       }
     })
-    console.log('batchPolling', res.data)
+
+    if (this.debug) {
+      console.log('batchPolling', res.data)
+    }
     return res.data
   }
 }
