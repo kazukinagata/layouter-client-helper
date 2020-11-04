@@ -170,13 +170,26 @@ Returns Promise<string[]>
 
 ### batchCreate
 ---
-batchCreate ( contents: {[clientId: string]: {uuid: string; value: string}[]} ): Promise<{[clientId: string]: {png: string[], pdf: string}}>
+batchCreate ( contents: {[clientId: string]: {uuid: string; value: string}[]} ): Promise< string >
 
 ---
-Returns Promise<{[clientId: string]: {png: string[], pdf: string}}>
+Returns Promise< string >
 
 ---
-名刺一括作成時のサムネイル画像とpdfのURLを返します
+名刺一括作成時のサムネイル画像とpdf生成のbackground jobを実行し、jobIdを返します。
+
+### batchPolling
+---
+batchPolling ( id: string ): {
+  id: string,
+  status: 'completed' | 'waiting' | 'active' | 'delayed' | 'failed' | 'paused',
+  value?: {[clientId:string]: {png: string[], pdf: string}},
+  progress: number
+  }
+
+---
+jobの実行状況を返します。statusが`completed`になると、生成したダウンロードURLが含まれるオブジェクトがvalueに渡されます。
+progressは0..100の値を取ります。
 
 ### static prepareData
 ---
