@@ -183,7 +183,7 @@ Returns Promise< string >
 batchPolling ( id: string ): {
   id: string,
   status: 'completed' | 'waiting' | 'active' | 'delayed' | 'failed' | 'paused',
-  value?: {[clientId:string]: {png: string[], pdf: string}},
+  value?: {[clientId:string]: {svg: string[], pdf: string}},
   progress: number
   }
 
