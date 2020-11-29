@@ -65,20 +65,11 @@ export default class {
 
   async update(params: UpdateParam[]) {
     try {
-      const [svg, pdf] = await Promise.all([
-        axios.post<string[]>(`${this.apiRoot}/svg/${this.docId}`, {
-          token: this.token,
-          params,
-        }),
-        axios.post<string>(`${this.apiRoot}/svg/${this.docId}/pdf`, {
-          token: this.token,
-          params,
-        }),
-      ])
-      return {
-        svg: svg.data,
-        pdf: pdf.data,
-      }
+      const res = await axios.post<{svg: string[], pdf: string}>(`${this.apiRoot}/svg/${this.docId}`, {
+        token: this.token,
+        params,
+      })
+      return res.data
     } catch (error) {
       throw new Error(error.message)
     }
