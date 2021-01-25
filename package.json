@@ -21,11 +21,11 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.21.1"
   },
   "devDependencies": {
-    "typescript": "^3.9.7",
-    "@types/node": "^14.0.27"
+    "@types/node": "^14.0.27",
+    "typescript": "^3.9.7"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
