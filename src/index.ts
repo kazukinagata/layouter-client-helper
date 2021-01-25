@@ -30,7 +30,7 @@ export default class {
   constructor(
     private token: string,
     private docId: string,
-    private version?: string,
+    private version?: string | number,
     private apiRoot: string = DEFAULT_API_ROOT,
     private debug: boolean = false
 

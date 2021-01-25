@@ -122,7 +122,7 @@ params
 |-----|-----|---|---|
 |token|string|-|config.jsonに含まれるtokenフィールド値を挿入|
 |docId|string|-|config.jsonに含まれるlayoutIdフィールド値を挿入|
-|version|string \| undefined|-|config.jsonに含まれるversionフィールド値を挿入|
+|version|string \| number \| undefined|-|config.jsonに含まれるversionフィールド値を挿入|
 |apiRoot|string|http://localhost:9000/api/v1|<ul><li>staging: https://layouter-editor-server-stg.herokuapp.com/api/v1</li><li>production: https://layouter-editor-server.herokuapp.com/api/v1</li>|
 
 
