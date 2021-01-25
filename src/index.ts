@@ -31,7 +31,9 @@ export default class {
     private token: string,
     private docId: string,
     private apiRoot: string = DEFAULT_API_ROOT,
-    private debug: boolean = false
+    private debug: boolean = false,
+
+    private version?: string
   ) {}
 
   static prepareData(data: Inputs): UpdateParam[] {
@@ -54,6 +56,7 @@ export default class {
         {
           params: {
             token: this.token,
+            version: this.version,
           },
         }
       )
@@ -67,6 +70,7 @@ export default class {
     try {
       const res = await axios.post<{svg: string[], pdf: string}>(`${this.apiRoot}/svg/${this.docId}`, {
         token: this.token,
+        version: this.version,
         params,
       })
       return res.data
@@ -81,6 +85,7 @@ export default class {
       `${this.apiRoot}/svg/${this.docId}/png`,
       {
         token: this.token,
+        version: this.version,
         params,
         size,
       }
@@ -95,6 +100,7 @@ export default class {
       {
         params: {
           token: this.token,
+          version: this.version,
         },
       }
     )
@@ -104,6 +110,7 @@ export default class {
   async batchCreate(contents: { [clientId: string]: UpdateParam[] }) {
     const res = await axios.post<{id: string}>(`${this.apiRoot}/batch`, {
       token: this.token,
+      version: this.version,
       layoutId: this.docId,
       contents,
     })
@@ -119,6 +126,7 @@ export default class {
     }>(`${this.apiRoot}/batch/${id}`, {
       params: {
         token: this.token,
+        version: this.version,
         layoutId: this.docId,
       }
     })
