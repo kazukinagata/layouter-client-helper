@@ -30,10 +30,10 @@ export default class {
   constructor(
     private token: string,
     private docId: string,
+    private version?: string,
     private apiRoot: string = DEFAULT_API_ROOT,
-    private debug: boolean = false,
+    private debug: boolean = false
 
-    private version?: string
   ) {}
 
   static prepareData(data: Inputs): UpdateParam[] {
